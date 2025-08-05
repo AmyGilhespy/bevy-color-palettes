@@ -123,11 +123,11 @@ fn to_lower_snake_case(s: &str) -> String {
 /// pub struct MyPalette;
 ///
 /// impl MyPalette {
-///     /// RED; <div style="background-color: rgb(100% 0% 0%);" height: 20px"></div>
+///     /// RED; <div style="background-color: rgb(100% 0% 0%); height: 20px"></div>
 ///     pub const RED: Color = Color::rgb(1.0, 0.0, 0.0);
-///     /// GREEN; <div style="background-color: rgb(0% 100% 0%);" height: 20px"></div>
+///     /// GREEN; <div style="background-color: rgb(0% 100% 0%); height: 20px"></div>
 ///     pub const GREEN: Color = Color::rgb(0.0, 1.0, 0.0);
-///     /// BLUE; <div style="background-color: rgb(0% 0% 100%);" height: 20px"></div>
+///     /// BLUE; <div style="background-color: rgb(0% 0% 100%); height: 20px"></div>
 ///     pub const BLUE: Color = Color::rgb(0.0, 0.0, 1.0);
 ///     
 ///     pub fn red(&self) -> Color { Self::RED }
@@ -152,11 +152,13 @@ pub fn palette(input: TokenStream) -> TokenStream {
 	let mut const_defs = Vec::new();
 	let mut method_defs = Vec::new();
 	let mut get_color_match_arms = Vec::new();
-	let mut from_str_match_arms = Vec::new();
 	let mut color_values = Vec::new();
+	let mut doc_grid_entry = Vec::new();
+	let mut color_rgb = Vec::new();
 
 	for color in &palette_def.colors {
 		let color_name = &color.name;
+		let normalised = normalize_color_name(color_name);
 		let const_name = Ident::new(&to_upper_snake_case(color_name), Span::call_site());
 		let method_name = format_ident!("{}", to_lower_snake_case(color_name));
 
@@ -164,22 +166,36 @@ pub fn palette(input: TokenStream) -> TokenStream {
 		let g = color.g;
 		let b = color.b;
 
-		let rustdoc = format!(
-			r#"{}; <div style="background-color: rgb({:.0}% {:.0}% {:.0}%);" height: 20px"></div>"#,
-			const_name,
+
+		let current_rgb =format!(
+			"rgb({:.0}%, {:.0}%, {:.0}%)",
 			r * 100.0,
 			g * 100.0,
 			b * 100.0
 		);
 
+		let rustdoc = format!(
+			r#"<div style="background-color: {}; height: 20px"></div>"#,
+			current_rgb
+		);
+
+		let funcdoc = format!(
+			r#"Returns the value of [{}::{}]<br/>{}"#,
+			palette_name,
+			const_name,
+			rustdoc,
+		);
+		color_rgb.push(current_rgb);
+
 		// Add the constant definition
 		const_defs.push(quote! {
-            #[doc = #rustdoc]
+			#[doc = #rustdoc]
 			pub const #const_name: #bevy_color = #bevy_color::srgb(#r, #g, #b);
 		});
 
 		// Add the method definition (static, no &self)
 		method_defs.push(quote! {
+			#[doc = #funcdoc]
 			pub fn #method_name() -> #bevy_color {
 				Self::#const_name
 			}
@@ -187,29 +203,38 @@ pub fn palette(input: TokenStream) -> TokenStream {
 
 		// Add the match arm for get_color
 		get_color_match_arms.push(quote! {
-			#color_name => Some(Self::#const_name),
-		});
-
-		// Add the match arm for from_str
-		from_str_match_arms.push(quote! {
-			#color_name => Ok(Self::#const_name),
+			#normalised => Some(Self::#const_name),
 		});
 
 		// Add the color value for the iterator
 		color_values.push(quote! {
 			Self::#const_name,
 		});
-	}
 
+		doc_grid_entry.push(format!(
+			r#"<div style="background-color: rgb({:.0}% {:.0}% {:.0}%); width: 20px; height: 20px;"></div>"#,
+			r * 100.0,
+			g * 100.0,
+			b * 100.0
+		));
+	}
 
 	// Get the number of colors
 	let num_colors = palette_def.colors.len();
 	let num_colors_lit = proc_macro2::Literal::usize_unsuffixed(num_colors);
 	let iter_type = quote! { ::core::array::IntoIter<#bevy_color, #num_colors_lit> };
 
+	let root_doc = format!(
+		r#"<span>The {} palette, containing {} colors.</span> <br />
+		<div style="display: grid; grid-template-columns: repeat(8, 20px); grid-auto-rows: 20px;">{}</div>"#,
+		palette_name,
+		num_colors,
+		doc_grid_entry.join("\n")
+	);
+
 	// Generate the final code
 	let expanded = quote! {
-		/// The #palette_name palette
+		#[doc = #root_doc]
 		#[derive(::core::fmt::Debug, ::core::clone::Clone, ::core::marker::Copy)]
 		pub struct #palette_name;
 
@@ -217,6 +242,15 @@ pub fn palette(input: TokenStream) -> TokenStream {
 			#(#const_defs)*
 
 			#(#method_defs)*
+
+			// Helper function to normalize color names for case-insensitive and format-agnostic comparison
+			#[doc(hidden)]
+			fn normalize_color_name(s: &str) -> String {
+				s.chars()
+					.filter(|c| c.is_alphanumeric())
+					.map(|c| c.to_ascii_lowercase())
+					.collect()
+			}
 
 			/// Returns all colors in the palette as a fixed-size array
 			pub fn all() -> [#bevy_color; #num_colors_lit] {
@@ -230,10 +264,11 @@ pub fn palette(input: TokenStream) -> TokenStream {
 
 			/// Returns a color by name, if it exists in the palette
 			pub fn get(name: &str) -> Option<#bevy_color> {
-				match name {
-                    #(#get_color_match_arms)*
-                    _ => None,
-                }
+				let name = Self::normalize_color_name(name);
+				match name.as_str() {
+					#(#get_color_match_arms)*
+					_ => None,
+				}
 			}
 		}
 
@@ -258,4 +293,11 @@ pub fn palette(input: TokenStream) -> TokenStream {
 
 	// Return the generated code
 	expanded.into()
+}
+
+fn normalize_color_name(s: &str) -> String {
+	s.chars()
+		.filter(|c| c.is_alphanumeric())
+		.map(|c| c.to_ascii_lowercase())
+		.collect()
 }

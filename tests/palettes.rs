@@ -91,5 +91,9 @@ fn test_get() {
 		TestPalette::get("custom_color"),
 		Some(Color::srgb(0.5, 0.5, 0.5))
 	);
+	assert_eq!(
+		TestPalette::get("CUSTOM_COLOR"),
+		Some(Color::srgb(0.5, 0.5, 0.5))
+	);
 	assert_eq!(TestPalette::get("nonexistent"), None);
 }
