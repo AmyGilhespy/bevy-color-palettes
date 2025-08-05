@@ -1,0 +1,14 @@
+[package]
+name = "weirdboi_bevy_colour"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+members = ["macros"]
+
+[dependencies]
+macros = { path = "macros" }
+bevy_color = "0.16"
+
+[dev-dependencies]
+bevy = { version = "0.16", default-features = false, features = ["bevy_color"] }
