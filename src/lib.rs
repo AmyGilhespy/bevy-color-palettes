@@ -1,4 +1,5 @@
  //! A collection of popular color palettes, with utilities interacting with them.
+ //!
  //! ## Creating palettes
  //!
  //! The palette! macro is available for generating additional colour palettes with
@@ -20,25 +21,29 @@
  //! MyNewPalette::some_color();
  //!
  //! // Look up colour by case and format insensitive name:
- //! assert_eq!(MyNewPalette::get("someColor"), MyNewPalette::get("SOME_COLOR"))
+ //! assert_eq!(MyNewPalette::get("someColor"), MyNewPalette::get("SOME_COLOR"));
+ //!
+ //! // Iterate over all the colours in a palette:
+ //! for color in &MyNewPalette {
+ //!    // color is a bevy::color::Color instance
+ //!    println!("{:?}", color);
+ //! }
  //! ```
  //!
  //! ## Using existing palettes
  //!
  //! `weirdboi_bevy_colour` provides a collection of popular colour palettes, including:
  //! - [Nanner Pancakes](https://lospec.com/palette-list/nanner-pancakes)
- //! - [Resurrect 64](https://lospec.com/palette-list/ressurect-64)
+ //! - [Resurrect 64](https://lospec.com/palette-list/resurrect-64)
  //! - [Resurrect 32](https://lospec.com/palette-list/resurrect-32)
  //! - [Dawnbringer 16](https://lospec.com/palette-list/dawnbringer-16)
  //! - [Dawnbringer 32](https://lospec.com/palette-list/dawnbringer-32)
- //!
  //!
  //! ## What is each colour?
  //!
  //! If you want to see a preview of each colour, check the rustdoc for each palette. The doc for
  //! the palette will contain a grid of available colours, and each colour constant will contain
  //! a colour bar.
- //!
 
 pub use macros::palette;
 

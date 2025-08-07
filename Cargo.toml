@@ -2,6 +2,11 @@
 name = "weirdboi_bevy_colour"
 version = "0.1.0"
 edition = "2024"
+authors = [
+    "Louis Capitanchik <louis@weirdboi.com>"
+]
+repository = "https://weirdboi.dev/libraries/bevy-colours"
+homepage = "https://weirdboi.dev/libraries/bevy-colours"
 
 [workspace]
 members = ["macros"]

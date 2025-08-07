@@ -196,7 +196,7 @@ pub fn palette(input: TokenStream) -> TokenStream {
 		// Add the method definition (static, no &self)
 		method_defs.push(quote! {
 			#[doc = #funcdoc]
-			pub fn #method_name() -> #bevy_color {
+			pub const fn #method_name() -> #bevy_color {
 				Self::#const_name
 			}
 		});
@@ -253,8 +253,13 @@ pub fn palette(input: TokenStream) -> TokenStream {
 			}
 
 			/// Returns all colors in the palette as a fixed-size array
-			pub fn all() -> [#bevy_color; #num_colors_lit] {
+			pub const fn all() -> [#bevy_color; #num_colors_lit] {
 				[#(#color_values)*]
+			}
+
+			/// Returns the number of colours in the palette
+			pub const fn len() -> usize {
+				#num_colors_lit
 			}
 
 			/// Returns an iterator over all colors in the palette
