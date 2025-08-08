@@ -3,6 +3,7 @@ name = "weirdboi_bevy_colour"
 version = "0.1.0"
 edition = "2024"
 description = "Colour palettes for Bevy, with macros for compile-time palette definitions."
+license = "Apache-2.0"
 authors = [
     "Louis Capitanchik <louis@weirdboi.com>"
 ]
