@@ -2,6 +2,7 @@
 name = "weirdboi_bevy_colour"
 version = "0.1.0"
 edition = "2024"
+description = "Colour palettes for Bevy, with macros for compile-time palette definitions."
 authors = [
     "Louis Capitanchik <louis@weirdboi.com>"
 ]
@@ -12,5 +13,5 @@ homepage = "https://weirdboi.dev/libraries/bevy-colours"
 members = ["macros"]
 
 [dependencies]
-macros = { path = "macros" }
+macros = { package = "weirdboi_bevy_colour_macros", path = "macros", version = "0.1.0" }
 bevy = { version = "0.16", default-features = false, features = ["bevy_color"] }

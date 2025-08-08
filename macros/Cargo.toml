@@ -1,7 +1,8 @@
 [package]
-name = "macros"
+name = "weirdboi_bevy_colour_macros"
 version = "0.1.0"
 edition = "2024"
+description = "Proc-macro crate for weirdboi_bevy_colour: compile-time helpers for defining Bevy colour palettes."
 
 [lib]
 path = "src/lib.rs"
