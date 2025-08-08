@@ -166,25 +166,18 @@ pub fn palette(input: TokenStream) -> TokenStream {
 		let g = color.g;
 		let b = color.b;
 
-
-		let current_rgb =format!(
+		let current_rgb = format!(
 			"rgb({:.0}%, {:.0}%, {:.0}%)",
 			r * 100.0,
 			g * 100.0,
 			b * 100.0
 		);
 
-		let rustdoc = format!(
-			r#"<div style="background-color: {}; height: 20px"></div>"#,
-			current_rgb
-		);
+		let rustdoc =
+			format!(r#"<div style="background-color: {current_rgb}; height: 20px"></div>"#,);
 
-		let funcdoc = format!(
-			r#"Returns the value of [{}::{}]<br/>{}"#,
-			palette_name,
-			const_name,
-			rustdoc,
-		);
+		let funcdoc =
+			format!(r#"Returns the value of [{palette_name}::{const_name}]<br/>{rustdoc}"#,);
 		color_rgb.push(current_rgb);
 
 		// Add the constant definition
@@ -225,10 +218,8 @@ pub fn palette(input: TokenStream) -> TokenStream {
 	let iter_type = quote! { ::core::array::IntoIter<#bevy_color, #num_colors_lit> };
 
 	let root_doc = format!(
-		r#"<span>The {} palette, containing {} colors.</span> <br />
+		r#"<span>The {palette_name} palette, containing {num_colors} colors.</span> <br />
 		<div style="display: grid; grid-template-columns: repeat(8, 20px); grid-auto-rows: 20px;">{}</div>"#,
-		palette_name,
-		num_colors,
 		doc_grid_entry.join("\n")
 	);
 
