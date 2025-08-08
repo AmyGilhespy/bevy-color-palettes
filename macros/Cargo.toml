@@ -4,6 +4,11 @@ version = "0.1.0"
 edition = "2024"
 description = "Proc-macro crate for weirdboi_bevy_colour: compile-time helpers for defining Bevy colour palettes."
 license = "Apache-2.0"
+authors = [
+    "Louis Capitanchik <louis@weirdboi.com>"
+]
+repository = "https://weirdboi.dev/libraries/bevy-colours"
+homepage = "https://weirdboi.dev/libraries/bevy-colours"
 
 [lib]
 path = "src/lib.rs"
