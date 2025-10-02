@@ -77,4 +77,5 @@ for colour in &MyGamePalette {
 
 | version | bevy |
 |---------|------|
+| 0.2     | 0.17 |
 | 0.1     | 0.16 |

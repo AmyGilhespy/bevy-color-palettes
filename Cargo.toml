@@ -1,6 +1,6 @@
 [package]
 name = "weirdboi_bevy_colour"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 description = "Colour palettes for Bevy, with macros for compile-time palette definitions."
 license = "Apache-2.0"
@@ -15,4 +15,4 @@ members = ["macros"]
 
 [dependencies]
 macros = { package = "weirdboi_bevy_colour_macros", path = "macros", version = "0.1.0" }
-bevy = { version = "0.16", default-features = false, features = ["bevy_color"] }
+bevy = { version = "0.17", default-features = false, features = ["bevy_color"] }
