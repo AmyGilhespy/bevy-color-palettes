@@ -19,7 +19,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-weirdboi_bevy_colour = "0.1.0"
+weirdboi_bevy_colour = "0.2.0"
 ```
 
 ## Usage
