@@ -124,10 +124,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy-color-macros"
+version = "0.1.0-alpha.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c25d2c7848bcf1a868c645e2bb25cbadc46832808d306a9844a3986bc5c16352"
+dependencies = [
+ "proc-macro-crate",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "bevy-color-palettes"
 version = "0.1.0-alpha.1"
 dependencies = [
  "bevy",
+ "bevy-color-macros 0.1.0-alpha.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "egui",
 ]
 

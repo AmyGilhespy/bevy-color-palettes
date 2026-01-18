@@ -15,7 +15,7 @@ homepage = "https://weirdboi.dev/libraries/bevy-colours"
 members = ["macros"]
 
 [dependencies]
-#macros = { package = "bevy-color-macros", version = "0.1.0-alpha.1" }
+macros = { package = "bevy-color-macros", version = "0.1.0-alpha.1" }
 bevy = { version = "0.17.0", optional = true, default-features = false, features = ["bevy_color"] }
 egui = { version = "0.33.3", optional = true, default-features = false }
 
