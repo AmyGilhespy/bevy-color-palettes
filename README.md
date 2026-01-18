@@ -14,6 +14,7 @@ A Rust library providing a collection of popular colour palettes for the [Bevy](
   - [Resurrect 32](https://lospec.com/palette-list/resurrect-32)
   - [Dawnbringer 16](https://lospec.com/palette-list/dawnbringer-16)
   - [Dawnbringer 32](https://lospec.com/palette-list/dawnbringer-32)
+  - All palettes from Aseprite have been added.
 
 - **Visual Documentation**: Each palette includes custom HTML when generating a Rustdoc to showcase the available colours. Integrates nicely with IDE doc previews
 

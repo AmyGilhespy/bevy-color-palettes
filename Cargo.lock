@@ -137,7 +137,7 @@ dependencies = [
 
 [[package]]
 name = "bevy-color-palettes"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 dependencies = [
  "bevy",
  "bevy-color-macros 0.1.0-alpha.1 (registry+https://github.com/rust-lang/crates.io-index)",
