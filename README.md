@@ -1,4 +1,8 @@
-# Bevy Colour Palettes
+# Bevy Color Palettes
+
+This is a fork of `weirdboi_bevy_colour` which adds more pre-defined palettes that I needed for my own projects.  It is currently in early development.
+
+## Original Description
 
 A Rust library providing a collection of popular colour palettes for the [Bevy](https://bevy.org/) game engine, with utilities for interacting with them.
 
@@ -19,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-weirdboi_bevy_colour = "0.2.0"
+bevy-color-palettes = { git = "https://github.com/AmyGilhespy/bevy-color-palettes", branch = "main" }
 ```
 
 ## Usage
@@ -28,7 +32,7 @@ weirdboi_bevy_colour = "0.2.0"
 
 ```rust
 use bevy::prelude::*;
-use weirdboi_bevy_colour::Dawnbringer16;
+use bevy_color_palettes::Dawnbringer16;
 
 fn setup(mut commands: Commands) {
   let mut x = 0.0;
@@ -53,7 +57,7 @@ fn setup(mut commands: Commands) {
 You can create your own colour palettes using the `palette!` macro:
 
 ```rust
-use weirdboi_bevy_colour::palette;
+use bevy_color_palettes::palette;
 
 palette!(MyGamePalette {
     "hero": (0.2, 0.6, 0.9),
@@ -77,5 +81,15 @@ for colour in &MyGamePalette {
 
 | version | bevy |
 |---------|------|
-| 0.2     | 0.17 |
-| 0.1     | 0.16 |
+| 0.1     | 0.17 |
+
+
+## Attribution
+
+This project is based on work originally published at:
+https://weirdboi.dev/libraries/bevy-colours
+
+Licensed under the Apache License, Version 2.0.
+
+This fork significantly expands the available palettes
+and is independently maintained.

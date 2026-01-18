@@ -1,18 +1,25 @@
 [package]
-name = "weirdboi_bevy_colour"
-version = "0.3.0-rc.1"
+name = "bevy-color-palettes"
+version = "0.1.0-alpha.1"
 edition = "2024"
-description = "Colour palettes for Bevy, with macros for compile-time palette definitions."
+description = "Color palettes for Bevy and egui, with macros for compile-time palette definitions, based on weirdboi_bevy_colour."
 license = "Apache-2.0"
 authors = [
-    "Louis Capitanchik <louis@weirdboi.com>"
+    "Louis Capitanchik <louis@weirdboi.com>",
+    "Amy"
 ]
-repository = "https://weirdboi.dev/libraries/bevy-colours"
+repository = "https://github.com/AmyGilhespy/bevy-color-palettes"
 homepage = "https://weirdboi.dev/libraries/bevy-colours"
 
 [workspace]
 members = ["macros"]
 
 [dependencies]
-macros = { package = "weirdboi_bevy_colour_macros", path = "macros", version = "0.1.0" }
-bevy = { version = "0.18.0-rc.1", default-features = false, features = ["bevy_color"] }
+macros = { package = "bevy-color-macros", path = "macros", version = "0.1.0-alpha.1" }
+bevy = { version = "0.17.0", optional = true, default-features = false, features = ["bevy_color"] }
+egui = { version = "0.33.3", optional = true, default-features = false }
+
+[features]
+default = []
+bevy = ["dep:bevy"]
+egui = ["dep:egui"]
