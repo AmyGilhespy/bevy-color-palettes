@@ -43,14 +43,7 @@ pull:
     git pull
 
 # Run `cargo check`, `cargo fmt --check`, `cargo clippy -- -D warnings` and same with `-W clippy::pedantic`, `cargo test`, and `cargo build`.
-ci:
-    clear
-    cd macros && cargo check
-    cd macros && cargo fmt --check
-    cd macros && cargo clippy -- -D warnings
-    cd macros && cargo clippy -- -D warnings -W clippy::pedantic
-    cd macros && cargo test
-    cd macros && cargo build
+ci: ci-macros-only
     cargo check
     cargo fmt --check
     cargo clippy -- -D warnings
@@ -58,13 +51,27 @@ ci:
     cargo test
     cargo build
 
-publish-dry-run: ci
+# Run `cargo check`, `cargo fmt --check`, `cargo clippy -- -D warnings` and same with `-W clippy::pedantic`, `cargo test`, and `cargo build`.
+ci-macros-only:
+    clear
+    cd macros && cargo check
+    cd macros && cargo fmt --check
+    cd macros && cargo clippy -- -D warnings
+    cd macros && cargo clippy -- -D warnings -W clippy::pedantic
+    cd macros && cargo test
+    cd macros && cargo build
+
+publish-dry-run-macros: ci-macros-only
     cargo publish -p bevy-color-macros --dry-run
+
+publish-dry-run-palettes: ci
     cargo publish -p bevy-color-palettes --dry-run
 
-publish-for-real: ci
+publish-for-real-macros: ci-macros-only
     cargo publish -p bevy-color-macros --dry-run
     cargo publish -p bevy-color-macros
+
+publish-for-real: ci
     cargo publish -p bevy-color-palettes --dry-run
     cargo publish -p bevy-color-palettes
 
