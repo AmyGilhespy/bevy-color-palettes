@@ -2,6 +2,26 @@
 
 This is a fork of `weirdboi_bevy_colour` which adds more pre-defined palettes that I needed for my own projects.  It is currently in early development.
 
+- All palettes from Aseprite have been added.
+- All palettes from bevy::color::palettes have been added (with egui support).
+
+## Bevy Compatibility
+
+| version | bevy |
+|---------|------|
+| 0.2     | 0.18 |
+| 0.1     | 0.17 |
+
+## Attribution
+
+This project is based on work originally published at:
+https://weirdboi.dev/libraries/bevy-colours
+
+Licensed under the Apache License, Version 2.0.
+
+This fork significantly expands the available palettes
+and is independently maintained.
+
 ## Original Description
 
 A Rust library providing a collection of popular colour palettes for the [Bevy](https://bevy.org/) game engine, with utilities for interacting with them.
@@ -14,7 +34,6 @@ A Rust library providing a collection of popular colour palettes for the [Bevy](
   - [Resurrect 32](https://lospec.com/palette-list/resurrect-32)
   - [Dawnbringer 16](https://lospec.com/palette-list/dawnbringer-16)
   - [Dawnbringer 32](https://lospec.com/palette-list/dawnbringer-32)
-  - All palettes from Aseprite have been added.
 
 - **Visual Documentation**: Each palette includes custom HTML when generating a Rustdoc to showcase the available colours. Integrates nicely with IDE doc previews
 
@@ -77,20 +96,3 @@ for colour in &MyGamePalette {
     // Use colour...
 }
 ```
-
-## Bevy Compatibility
-
-| version | bevy |
-|---------|------|
-| 0.1     | 0.17 |
-
-
-## Attribution
-
-This project is based on work originally published at:
-https://weirdboi.dev/libraries/bevy-colours
-
-Licensed under the Apache License, Version 2.0.
-
-This fork significantly expands the available palettes
-and is independently maintained.

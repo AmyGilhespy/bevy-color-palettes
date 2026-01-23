@@ -50,6 +50,7 @@
 pub use macros::palette;
 
 pub mod aseprite;
+pub mod bevy;
 pub mod color;
 mod dawnbringer;
 mod nanner;

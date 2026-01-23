@@ -1,12 +1,12 @@
 [package]
 name = "bevy-color-macros"
-version = "0.1.0-alpha.1"
+version = "0.2.0-alpha.1"
 edition = "2024"
 description = "Proc-macro crate for bevy-color-palettes: compile-time helpers for defining Bevy color palettes."
 license = "Apache-2.0"
 authors = [
     "Louis Capitanchik <louis@weirdboi.com>",
-    "Amy Gilhespy <amyogilhespy@gmail.com>"
+    "Amy Gilhespy <amyogilhespy@gmail.com>",
 ]
 repository = "https://github.com/AmyGilhespy/bevy-color-palettes"
 homepage = "https://weirdboi.dev/libraries/bevy-colours"

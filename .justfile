@@ -38,7 +38,7 @@ fmt:
 
 
 # Add all unignored files to git and make a commit with MESSAGE as the commit message.
-commit *MESSAGE="Unlabeled commit.":
+commit *MESSAGE="Unlabeled commit.": ci
 	git add .
 	git commit -m "{{MESSAGE}}"
 
