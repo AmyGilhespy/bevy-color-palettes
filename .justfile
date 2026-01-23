@@ -71,7 +71,7 @@ publish-for-real-macros: ci-macros-only
     cargo publish -p bevy-color-macros --dry-run
     cargo publish -p bevy-color-macros
 
-publish-for-real: ci
+publish-for-real-palettes: ci
     cargo publish -p bevy-color-palettes --dry-run
     cargo publish -p bevy-color-palettes
 
