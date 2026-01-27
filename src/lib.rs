@@ -53,6 +53,8 @@ pub mod aseprite;
 pub mod bevy;
 pub mod color;
 mod dawnbringer;
+#[cfg(feature = "parse")]
+pub mod error;
 mod nanner;
 mod resurrect;
 

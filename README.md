@@ -11,10 +11,10 @@ Features marked `experimental` are experiments and are subject to change without
 
 ## Bevy Compatibility
 
-| version | bevy |
-| ------- | ---- |
-| 0.2     | 0.18 |
-| 0.1     | 0.17 |
+| version   | bevy |
+| --------- | ---- |
+| 0.2 - 0.3 | 0.18 |
+| 0.1       | 0.17 |
 
 ## Attribution
 

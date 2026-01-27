@@ -1,3 +1,6 @@
+#[cfg(feature = "parse")]
+use crate::error::Error;
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct Color {
 	pub r8: u8,
@@ -17,6 +20,89 @@ impl Color {
 			a8,
 			intensity16: 256_u16,
 		}
+	}
+
+	/// # Errors
+	/// - `Error::ParseError` - Parse format errors.
+	#[cfg(feature = "parse")]
+	pub fn try_parse(string: &str) -> Result<Self, Error> {
+		let Some(mut hex) = string.strip_prefix('#') else {
+			return Err(Error::ParseError(
+				"HTML hex color string must start with '#'.".into(),
+			)); // So we can support named colors in the future.
+		};
+
+		let mut i16 = 256_u16;
+		if hex.as_bytes().get(hex.len() - 5) == Some(&b'+') {
+			hex = &hex[0..(hex.len() - 5)];
+			i16 = u16::from_str_radix(&hex[(hex.len() - 4)..], 16).map_err(|err| {
+				Error::ParseError(format!("Error parsing intensity portion: {err}"))
+			})?;
+		}
+
+		let (r, g, b, a) = match hex.len() {
+			8 => {
+				let r = u8::from_str_radix(&hex[0..2], 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #RRggbbaa portion: {err}"))
+				})?;
+				let g = u8::from_str_radix(&hex[2..4], 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rrGGbbaa portion: {err}"))
+				})?;
+				let b = u8::from_str_radix(&hex[4..6], 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rrggBBaa portion: {err}"))
+				})?;
+				let a = u8::from_str_radix(&hex[6..8], 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rrggbbAA portion: {err}"))
+				})?;
+				(r, g, b, a)
+			}
+			6 => {
+				let r = u8::from_str_radix(&hex[0..2], 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #RRggbb portion: {err}"))
+				})?;
+				let g = u8::from_str_radix(&hex[2..4], 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rrGGbb portion: {err}"))
+				})?;
+				let b = u8::from_str_radix(&hex[4..6], 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rrggBB portion: {err}"))
+				})?;
+				(r, g, b, 255_u8)
+			}
+			4 => {
+				let r = u8::from_str_radix(&hex[0..1].repeat(2), 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #Rgba portion: {err}"))
+				})?;
+				let g = u8::from_str_radix(&hex[1..2].repeat(2), 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rGba portion: {err}"))
+				})?;
+				let b = u8::from_str_radix(&hex[2..3].repeat(2), 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rgBa portion: {err}"))
+				})?;
+				let a = u8::from_str_radix(&hex[3..4].repeat(2), 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rgbA portion: {err}"))
+				})?;
+				(r, g, b, a)
+			}
+			3 => {
+				let r = u8::from_str_radix(&hex[0..1].repeat(2), 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #Rgb portion: {err}"))
+				})?;
+				let g = u8::from_str_radix(&hex[1..2].repeat(2), 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rGb portion: {err}"))
+				})?;
+				let b = u8::from_str_radix(&hex[2..3].repeat(2), 16).map_err(|err| {
+					Error::ParseError(format!("Error parsing #rgB portion: {err}"))
+				})?;
+				(r, g, b, 255_u8)
+			}
+			_ => {
+				return Err(Error::ParseError(
+					"Hex color must be in #rrggbb, #rrggbbaa, #rgb, or #rgba format.".into(),
+				));
+			}
+		};
+
+		Ok(Color::new(r, g, b, a).with_intensity_u16_experimental(i16))
 	}
 
 	#[must_use]
