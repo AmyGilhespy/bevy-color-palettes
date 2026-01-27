@@ -1,14 +1,18 @@
 # Bevy Color Palettes
 
-This is a fork of `weirdboi_bevy_colour` which adds more pre-defined palettes that I needed for my own projects.  It is currently in early development.
+This is a fork of `weirdboi_bevy_colour` which adds more pre-defined palettes that I needed for my own projects. It is currently in early development.
 
 - All palettes from Aseprite have been added.
 - All palettes from bevy::color::palettes have been added (with egui support).
 
+# Experimental Features
+
+Features marked `experimental` are experiments and are subject to change without a major version bump. Use these at your own risk.
+
 ## Bevy Compatibility
 
 | version | bevy |
-|---------|------|
+| ------- | ---- |
 | 0.2     | 0.18 |
 | 0.1     | 0.17 |
 
@@ -56,7 +60,7 @@ use bevy_color_palettes::Dawnbringer16;
 
 fn setup(mut commands: Commands) {
   let mut x = 0.0;
-  
+
   // Spawn a coloured square for each colour in the palette
   for color in &Dawnbringer16 {
     commands.spawn((

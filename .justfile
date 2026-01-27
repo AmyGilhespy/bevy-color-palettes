@@ -45,11 +45,26 @@ pull:
 # Run `cargo check`, `cargo fmt --check`, `cargo clippy -- -D warnings` and same with `-W clippy::pedantic`, `cargo test`, and `cargo build`.
 ci: ci-macros-only
     cargo check
+    cargo check --features=bevy
+    cargo check --features=egui
+    cargo check --features=bevy,egui
     cargo fmt --check
     cargo clippy -- -D warnings
     cargo clippy -- -D warnings -W clippy::pedantic
+    cargo clippy --features=bevy -- -D warnings
+    cargo clippy --features=bevy -- -D warnings -W clippy::pedantic
+    cargo clippy --features=egui -- -D warnings
+    cargo clippy --features=egui -- -D warnings -W clippy::pedantic
+    cargo clippy --features=bevy,egui -- -D warnings
+    cargo clippy --features=bevy,egui -- -D warnings -W clippy::pedantic
     cargo test
+    cargo test --features=bevy
+    cargo test --features=egui
+    cargo test --features=bevy,egui
     cargo build
+    cargo build --features=bevy
+    cargo build --features=egui
+    cargo build --features=bevy,egui
 
 # Run `cargo check`, `cargo fmt --check`, `cargo clippy -- -D warnings` and same with `-W clippy::pedantic`, `cargo test`, and `cargo build`.
 ci-macros-only:
