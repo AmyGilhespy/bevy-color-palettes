@@ -34,10 +34,10 @@ impl Color {
 
 		let mut i16 = 256_u16;
 		if hex.as_bytes().get(hex.len() - 5) == Some(&b'+') {
-			hex = &hex[0..(hex.len() - 5)];
 			i16 = u16::from_str_radix(&hex[(hex.len() - 4)..], 16).map_err(|err| {
 				Error::ParseError(format!("Error parsing intensity portion: {err}"))
 			})?;
+			hex = &hex[0..(hex.len() - 5)];
 		}
 
 		let (r, g, b, a) = match hex.len() {
