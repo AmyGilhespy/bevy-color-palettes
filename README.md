@@ -1,9 +1,51 @@
 # Bevy Color Palettes
 
-This is a fork of `weirdboi_bevy_colour` which adds more pre-defined palettes that I needed for my own projects. It is currently in early development.
+This is a fork of `weirdboi_bevy_colour` which adds more pre-defined palettes and features that I needed for my own projects. It is currently in early development.
 
 - All palettes from Aseprite have been added.
 - All palettes from bevy::color::palettes have been added (with egui support).
+- A basic "Common" palette with RGB primaries, CYMK primaries, Black, White, Transparent Black, and Transparent White.
+
+# Common Usage
+
+```rust
+use bevy::prelude::*;
+use bevy_color_palettes as pal; // It is recommended to use an `as` rename.
+
+fn setup(mut commands: Commands) {
+	// Common colors are as easy as this:
+	let _black: Color = pal::Common::BLACK.into();
+	let _white: Color = pal::Common::WHITE.into();
+
+	// Including transparent colors:
+	let _transparent_black: Color = pal::Common::TRANSPARENT_BLACK.into();
+	let _transparent_white: Color = pal::Common::TRANSPARENT_WHITE.into();
+
+	let mut x = 0.0;
+
+	// Spawn a coloured square for each colour in the palette
+	for color in &pal::google_ui::G500_16 {
+		commands.spawn((
+			Sprite {
+				color.into(),
+				custom_size: Some(Vec2::new(40.0, 40.0)),
+				..default()
+			},
+			Transform::from_xyz(x, 0.0, 0.0)
+		));
+		x += 50.0;
+	}
+
+	commands.spawn((
+		Sprite {
+			pal::Common::MAGENTA.into(),
+			custom_size: Some(Vec2::new(40.0, 40.0)),
+			..default()
+		},
+		Transform::from_xyz(0.0, 50.0, 0.0)
+	));
+}
+```
 
 # Experimental Features
 
@@ -59,20 +101,20 @@ use bevy::prelude::*;
 use bevy_color_palettes::Dawnbringer16;
 
 fn setup(mut commands: Commands) {
-  let mut x = 0.0;
+	let mut x = 0.0;
 
-  // Spawn a coloured square for each colour in the palette
-  for color in &Dawnbringer16 {
-    commands.spawn((
-      Sprite {
-        color,
-        custom_size: Some(Vec2::new(40.0, 40.0)),
-        ..default()
-      },
-      Transform::from_xyz(x, 0.0, 0.0)
-    ));
-    x += 50.0;
-  }
+	// Spawn a coloured square for each colour in the palette
+	for color in &Dawnbringer16 {
+		commands.spawn((
+			Sprite {
+				color,
+				custom_size: Some(Vec2::new(40.0, 40.0)),
+				..default()
+			},
+			Transform::from_xyz(x, 0.0, 0.0)
+		));
+		x += 50.0;
+	}
 }
 ```
 
@@ -84,10 +126,10 @@ You can create your own colour palettes using the `palette!` macro:
 use bevy_color_palettes::palette;
 
 palette!(MyGamePalette {
-    "hero": (0.2, 0.6, 0.9),
-    "enemy": (0.9, 0.2, 0.3),
-    "background": (0.1, 0.1, 0.2),
-    "highlight": (1.0, 0.8, 0.0),
+		"hero": (0.2, 0.6, 0.9),
+		"enemy": (0.9, 0.2, 0.3),
+		"background": (0.1, 0.1, 0.2),
+		"highlight": (1.0, 0.8, 0.0),
 });
 
 // Now you can use your palette just like the built-in ones:
@@ -97,6 +139,6 @@ let bg_colour = MyGamePalette::get("BaCKgrouND").unwrap();
 
 // Iterate over all colours
 for colour in &MyGamePalette {
-    // Use colour...
+		// Use colour...
 }
 ```

@@ -1,0 +1,58 @@
+use macros::palette;
+
+palette!(Concrete {
+	"white": "#cfd5d6ff",
+	"orange": "#e06101ff",
+	"magenta": "#a9309fff",
+	"light_blue": "#2489c7ff",
+	"yellow": "#f1af15ff",
+	"lime": "#5ea919ff",
+	"pink": "#d6658fff",
+	"gray": "#373a3eff",
+	"light_gray": "#7d7d73ff",
+	"cyan": "#157788ff",
+	"purple": "#64209cff",
+	"blue": "#2d2f8fff",
+	"brown": "#603c20ff",
+	"green": "#495b24ff",
+	"red": "#8e2121ff",
+	"black": "#080a0fff",
+});
+
+palette!(Terracotta {
+	"white": "#d2b2a1ff",
+	"orange": "#a25426ff",
+	"magenta": "#96586dff",
+	"light_blue": "#726d8aff",
+	"yellow": "#ba8523ff",
+	"lime": "#687635ff",
+	"pink": "#a24e4fff",
+	"gray": "#3a2a24ff",
+	"light_gray": "#876b62ff",
+	"cyan": "#575b5bff",
+	"purple": "#764656ff",
+	"blue": "#4a3c5bff",
+	"brown": "#4d3324ff",
+	"green": "#4c532aff",
+	"red": "#8f3d2fff",
+	"black": "#251710ff",
+});
+
+palette!(Wool {
+	"white": "#eaededff",
+	"orange": "#f17716ff",
+	"magenta": "#be46b5ff",
+	"light_blue": "#3cb0daff",
+	"yellow": "#f9c629ff",
+	"lime": "#71ba1aff",
+	"pink": "#ee90adff",
+	"gray": "#3f4548ff",
+	"light_gray": "#8e8f87ff",
+	"cyan": "#158a91ff",
+	"purple": "#7b2badff",
+	"blue": "#353a9eff",
+	"brown": "#734829ff",
+	"green": "#556e1cff",
+	"red": "#a12823ff",
+	"black": "#16161bff",
+});

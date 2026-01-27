@@ -1,0 +1,42 @@
+use macros::palette;
+
+palette!(G500 {
+	"red": "#e51c23ff",
+	"pink": "#e91e63ff",
+	"purple": "#9c27b0ff",
+	"deep_purple": "#673ab7ff",
+	"indigo": "#3f51b5ff",
+	"blue": "#5677fcff",
+	"light_blue": "#03a9f4ff",
+	"cyan": "#00bcd4ff",
+	"teal": "#009688ff",
+	"green": "#259b24ff",
+	"light_green": "#8bc34aff",
+	"lime": "#cddc39ff",
+	"yellow": "#ffeb3bff",
+	"amber": "#ffc107ff",
+	"orange": "#ff9800ff",
+	"deep_orange": "#ff5722ff",
+	"brown": "#795548ff",
+	"grey": "#9e9e9eff",
+	"blue_grey": "#607d8bff",
+});
+
+palette!(G500_16 {
+	"red": "#e51c23ff",
+	"pink": "#e91e63ff",
+	"purple": "#9c27b0ff",
+	"deep_purple": "#673ab7ff",
+	"indigo": "#3f51b5ff",
+	"blue": "#5677fcff",
+	"light_blue": "#03a9f4ff",
+	"cyan": "#00bcd4ff",
+	"teal": "#009688ff",
+	"green": "#259b24ff",
+	"light_green": "#8bc34aff",
+	"lime": "#cddc39ff",
+	"yellow": "#ffeb3bff",
+	"amber": "#ffc107ff",
+	"orange": "#ff9800ff",
+	"deep_orange": "#ff5722ff",
+});
