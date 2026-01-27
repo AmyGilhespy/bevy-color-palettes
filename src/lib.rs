@@ -1,5 +1,16 @@
 //! A collection of popular color palettes, with utilities interacting with them.
 //!
+//! ## Using palettes
+//!
+//! The recommended way to use this crate is to import it with an `as` rename:
+//!
+//! ```ignore
+//! use bevy_color_palettes as pal;
+//!
+//! let transparent_white: bevy::color::Color = pal::Common::TRANSPARENT_WHITE.into();
+//! let red: bevy::color::Color = pal::aseprite::GoogleUi::RED_500.into();
+//! ```
+//!
 //! ## Creating palettes
 //!
 //! The palette! macro is available for generating additional colour palettes with
@@ -52,12 +63,14 @@ pub use macros::palette;
 pub mod aseprite;
 pub mod bevy;
 pub mod color;
+mod common;
 mod dawnbringer;
 #[cfg(feature = "parse")]
 pub mod error;
 mod nanner;
 mod resurrect;
 
+pub use common::Common;
 pub use dawnbringer::{Dawnbringer16, Dawnbringer32};
 pub use nanner::NannerPancakes;
 pub use resurrect::{Resurrect32, Resurrect64};
